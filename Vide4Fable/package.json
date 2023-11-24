@@ -1,0 +1,16 @@
+{
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "postinstall": "dotnet tool restore",
+    "clean": "rimraf ./build && rimraf ./dist",
+    "dev": "npm run clean && dotnet fable watch ./src/Vide4Fable.fsproj -s -o ./build --run vite",
+    "build": "npm run clean && dotnet fable ./src/Vide4Fable.fsproj -o ./build --noCache --run vite build"
+  },
+  "devDependencies": {
+    "rimraf": "^5.0.1",
+    "sass": "^1.60.0",
+    "vite": "^4.4.4"
+  }
+}
