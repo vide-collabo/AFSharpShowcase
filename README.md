@@ -10,6 +10,7 @@ Flavours
 * Web: Vide for Fable
 * Desktop / Mobile: Vide for Avalonia
 
+
 How it works
 ---
 
@@ -21,6 +22,8 @@ How it works
 Facts
 ---
 
+* Can be mixed with other concepts like Promise/Async/etc. and provide a use case centered API for such cases
+* Immutability at it's core; open for mutability when required
 * Lightweight: "Hook-in" everywhere in your application
 * Universal: Not bound to a specific framework
 * No dependencies: No need to install a specific framework
