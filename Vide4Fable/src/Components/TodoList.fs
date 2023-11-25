@@ -20,7 +20,7 @@ let view = vide {
                     {| text = "Make a Trulla version for node"; isDone = false |}
                     {| text = "Write a LSP for Trulla templates"; isDone = false |}
                 ]
-                |> List.mapi (fun i x -> { text = x.text; isDone = x.isDone ;key = i })
+                |> List.mapi (fun i x -> { text = x.text; isDone = x.isDone; key = i })
         }
     }
     
@@ -42,7 +42,8 @@ let view = vide {
                 let newItem = { text = itemName.Value; isDone = false; key = nextId }
                 do setItems (newItem :: todoList.Value.items)
                 do itemName.Reset()
-            ) { 
+            ) 
+            {
                 "Add Item" 
             }
     }
@@ -53,9 +54,10 @@ let view = vide {
                 input.bind(item.isDone, fun value -> item.isDone <- value)
                 button
                     .disabled(not item.isDone)
-                    .onclick(fun _ -> setItems (todoList.Value.items |> List.except [item])) {
-                    "Remove"
-                }
+                    .onclick(fun _ -> setItems (todoList.Value.items |> List.except [item]))
+                    {
+                        "Remove"
+                    }
                 p { item.text }
             }
     }
