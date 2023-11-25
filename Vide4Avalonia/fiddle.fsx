@@ -6,11 +6,9 @@
 #r "nuget: Vide.UI.Avalonia.Interactive"
 #r "nuget: Vide.UI.Avalonia"
 
-
 open System
 open Vide
 open Vide.UI.Avalonia
-open Vide.UI.Avalonia.Interactive.Dynamic
 open type Vide.UI.Avalonia.Controls
 open type Vide.UI.Avalonia.AvaloniaControlsDefaults
 
@@ -21,10 +19,14 @@ Interactive.guardInit ()
 // ---------------------------------------------------------------
 
 
+let window = Interactive.createWindow 300. 500.
 
 
-let view = vide {
+
+let countWhat subject = vide {
     let! count = ofMutable {0}
+    
+    let add value = count.Value <- count.Value + value
     
     StackPanel
         .VerticalAlignment(VA.Top)
@@ -32,18 +34,25 @@ let view = vide {
         .Margin(10)
         {
             Button
-                .Click(fun _ -> count.Value <- count.Value - 1) { "-" }
+                .Click(fun _ -> add -1) { "-" }
             Button
-                .Click(fun _ -> count.Value <- count.Value + 1) { "+" }
+                .Click(fun _ -> add 1) { "+" }
 
             TextBlock
                 .Margin(Thickness(10., 0., 0., 0.))
-                .Text("Count: ")
-            TextBlock
-                .Text(count.Value.ToString())
+                .VerticalAlignment(VA.Center)
+                .Text($"Count {subject}: {count.Value}")
     }
 }
 
+let view = vide {
+    StackPanel
+        .VerticalAlignment(VA.Top)
+        .Margin(10)
+        {
+            countWhat "cats"
+            countWhat "dogs"
+    }
+}
 
-let window = Interactive.createWindow 300. 500.
 Interactive.showView view window
